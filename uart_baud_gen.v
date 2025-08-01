@@ -12,11 +12,11 @@ module baud_rate #(
   reg [COUNTER_WIDTH-1:0] counter = 0;
 
   always @(posedge clk or posedge reset) begin
-    $display(counter);
+    // $display(counter);
     if (reset) begin
       counter <= 0;
       baud_tick <= 0;
-    end else if (counter == $unsigned(BAUD_DIVISOR -1)[COUNTER_WIDTH-1:0]) begin
+    end else if (counter == BAUD_DIVISOR -1) begin
       counter <= 0;
       baud_tick <= 1; 
     end else begin
