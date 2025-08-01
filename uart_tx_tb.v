@@ -10,17 +10,22 @@ module uart_tx_tb;
   always #5 clk = ~clk;
 
   initial begin
+    $dumpfile("uart_tx_tb.vcd");
+    $dumpvars(0, uart_tx_tb);
     // $display("starting sim");
+    data_in = 0;
     reset = 1;
     load = 0;
     #20 reset = 0;
 
     #10 data_in = 8'b10101010;
     #10 load = 1;
-    #5 load = 0;
+    #100 load = 0;
 
-    $dumpfile("uart_tx_tb.vcd");
-    $dumpvars(0, uart_tx_tb);
+    #106300 data_in = 8'b11111111;
+    #10 load = 1;
+    #100 load = 0;
+
 
     #1000000 $finish;
   end
